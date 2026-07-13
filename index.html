@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iron Path: Four Blades</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div class="brand"><span>IRON PATH</span><small>FOUR BLADES</small></div>
+        <div class="chapter"><span id="mission-label">MISSION 01</span><strong id="objective">Secure the old bridge.</strong></div>
+        <button id="sound-button" aria-label="Toggle sound">SOUND: ON</button>
+      </header>
+
+      <section class="game-wrap">
+        <div id="canvas-wrap"><canvas id="game"></canvas><div id="hint">Select a unit to begin</div></div>
+        <aside>
+          <section class="panel unit-panel">
+            <p class="eyebrow">SELECTED UNIT</p>
+            <h2 id="unit-name">—</h2>
+            <div class="stat-row"><span>HP</span><div class="meter"><i id="hp-bar"></i></div><b id="hp-value">—</b></div>
+            <div class="stat-grid"><span>CLASS</span><b id="unit-class">—</b><span>MOVE</span><b id="unit-move">—</b><span>RANGE</span><b id="unit-range">—</b></div>
+          </section>
+          <section class="panel">
+            <p class="eyebrow">WEAPON TRIANGLE</p>
+            <div class="triangle"><span class="axe">AXE</span><em>beats</em><span class="sword">SWORD</span><em>beats</em><span class="spear">SPEAR</span><em>beats</em><span class="axe">AXE</span></div>
+            <p class="bow-note">BOW attacks from exactly 2 tiles away.</p>
+          </section>
+          <section class="panel log-panel">
+            <p class="eyebrow">BATTLE LOG</p><div id="log"></div>
+          </section>
+          <button id="end-turn">END PLAYER TURN <kbd>SPACE</kbd></button>
+        </aside>
+      </section>
+      <footer><span>CLICK UNIT → CLICK BLUE TILE TO MOVE → CLICK RED ENEMY TO ATTACK</span><span>R to restart mission</span></footer>
+    </main>
+    <div id="modal" class="modal hidden"><div class="modal-card"><p class="eyebrow" id="modal-kicker">MISSION COMPLETE</p><h1 id="modal-title"></h1><p id="modal-copy"></p><button id="modal-button">CONTINUE</button></div></div>
+    <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.161.0/build/three.module.js","tone":"https://cdn.jsdelivr.net/npm/tone@15.0.4/+esm"}}</script>
+    <script type="module" src="./game.js"></script>
+  </body>
+</html>
