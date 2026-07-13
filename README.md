@@ -1,18 +1,8 @@
 # Iron Path: Four Blades
 
-## Play locally
+## Play
 
-Do **not** open `index.html` directly. The game uses browser modules and needs a tiny local web server.
-
-On macOS, double-click `run-game.command`. It will open the game at `http://127.0.0.1:4173`.
-
-Alternatively, in Terminal from this folder, run:
-
-```sh
-python3 serve.py
-```
-
-Keep the Terminal window open while you play. Press `Control-C` to stop the game server.
+This is a single, self-contained HTML game. Open `index.html` directly in any modern browser—no installation, server, or internet connection is needed.
 
 ## Controls
 
