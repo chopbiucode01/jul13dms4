@@ -13,23 +13,23 @@
     <main class="shell">
       <header>
         <div class="brand"><span>IRON PATH</span><small>FOUR BLADES</small></div>
-        <div class="chapter"><span id="mission-label">MISSION 01</span><strong id="objective">Secure the old bridge.</strong></div>
+        <div class="chapter"><span id="mission-label">MISSION 00</span><strong id="objective">Complete the field drill.</strong><label class="mission-picker">CHOOSE MISSION <select id="mission-select" aria-label="Choose mission"><option value="0">MISSION 00 · TUTORIAL</option><option value="1">MISSION 01</option><option value="2">MISSION 02</option><option value="3">MISSION 03</option><option value="4">MISSION 04</option></select></label></div>
         <button id="sound-button" aria-label="Toggle sound">SOUND: ON</button>
       </header>
 
       <section class="game-wrap">
-        <div id="canvas-wrap"><canvas id="game"></canvas><div id="hint">Select a unit to begin</div></div>
+        <div id="canvas-wrap"><canvas id="game"></canvas><aside id="tutorial-card" class="tutorial-card hidden" aria-live="polite"></aside><div id="hint">Select a unit to begin</div><button id="mobile-end-turn" aria-label="End player turn">END PLAYER TURN <kbd>SPACE</kbd></button></div>
         <aside>
           <section class="panel unit-panel">
             <p class="eyebrow">SELECTED UNIT</p>
             <h2 id="unit-name">—</h2>
             <div class="stat-row"><span>HP</span><div class="meter"><i id="hp-bar"></i></div><b id="hp-value">—</b></div>
-            <div class="stat-grid"><span>CLASS</span><b id="unit-class">—</b><span>MOVE</span><b id="unit-move">—</b><span>RANGE</span><b id="unit-range">—</b></div>
+            <div class="stat-grid"><span>CLASS</span><b id="unit-class">—</b><span>MOVE</span><b id="unit-move">—</b><span>RANGE</span><b id="unit-range">—</b><span>MOVE ACTION</span><b id="unit-move-action">—</b><span>ATTACK ACTION</span><b id="unit-attack-action">—</b></div>
           </section>
           <section class="panel">
             <p class="eyebrow">WEAPON TRIANGLE</p>
             <div class="triangle"><span class="axe">AXE</span><em>beats</em><span class="sword">SWORD</span><em>beats</em><span class="spear">SPEAR</span><em>beats</em><span class="axe">AXE</span></div>
-            <p class="bow-note">BOW attacks from exactly 2 tiles away.</p>
+            <p class="bow-note">BOW attacks 2 tiles in a straight line, or 1 tile diagonally.</p>
           </section>
           <section class="panel log-panel">
             <p class="eyebrow">BATTLE LOG</p><div id="log"></div>
@@ -42,7 +42,36 @@
     <div id="battle-scene" class="battle-scene hidden" aria-live="polite"><div class="battle-card"><p class="eyebrow">CLASH AT THE FRONT</p><div class="battle-fighters"><div id="battle-attacker" class="fighter"></div><div class="versus">⚔</div><div id="battle-defender" class="fighter"></div></div><div id="battle-result" class="battle-result"></div><button id="battle-continue" class="battle-continue">CONTINUE <kbd>ESC</kbd></button></div></div>
     <div id="modal" class="modal hidden"><div class="modal-card"><p class="eyebrow" id="modal-kicker">MISSION COMPLETE</p><h1 id="modal-title"></h1><p id="modal-copy"></p><button id="modal-button">CONTINUE</button></div></div>
     <style>.battle-scene{position:fixed;inset:0;z-index:4;display:grid;place-items:center;background:#101310c9;pointer-events:auto}.battle-scene.hidden{display:none!important}.battle-card{width:min(620px,92vw);padding:28px;border:1px solid #c59b4b;background:linear-gradient(135deg,#263127,#171b1a);box-shadow:0 0 90px #000;text-align:center}.battle-fighters{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:12px;margin:18px 0}.fighter{min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:12px;background:#161b18;border:1px solid #4a4d40}.fighter-label{font-size:9px;letter-spacing:2px;color:#c59b4b}.fighter-icon{font:50px serif;line-height:1}.fighter strong{font:700 17px Cinzel,serif}.fighter small{font-size:10px;color:#bfc0b3}.versus{font-size:35px;color:#c59b4b;animation:clash .35s ease-in-out 2 alternate}.battle-result{display:flex;justify-content:space-around;gap:12px;font-size:11px;line-height:1.6}.battle-result span{flex:1}.battle-result b{color:#e67161;font-size:15px}.battle-continue{margin-top:22px;border-color:#c59b4b;background:#4c3b21;font-weight:bold}@keyframes clash{to{transform:scale(1.22) rotate(-8deg);color:#fff}}@media(max-width:500px){.battle-fighters{grid-template-columns:1fr 42px 1fr}.versus{font-size:24px}.fighter{min-height:110px;padding:7px}.fighter strong{font-size:13px}.battle-card{padding:18px}.battle-result{font-size:9px}}</style>
-    <script src="./vendor/three.min.js"></script>
-    <script src="./game.js"></script>
+    <style>
+      .unit-name.player{color:#76bfd2;font-weight:bold}.unit-name.enemy{color:#e27166;font-weight:bold}
+      .weapon-mark{display:inline-block;position:relative;width:54px;height:54px;vertical-align:middle}.weapon-mark i,.weapon-mark b{position:absolute;display:block;background:currentColor}.weapon-sword i{width:7px;height:43px;left:24px;top:3px;transform:rotate(42deg);border-radius:2px}.weapon-sword b{width:32px;height:6px;left:11px;top:33px;transform:rotate(42deg);border-radius:2px}.weapon-spear i{width:5px;height:50px;left:25px;top:2px;transform:rotate(42deg);border-radius:3px}.weapon-spear b{left:35px;top:0;background:transparent;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:16px solid currentColor;transform:rotate(42deg)}.weapon-axe i{width:6px;height:48px;left:24px;top:3px;transform:rotate(42deg);border-radius:3px}.weapon-axe b{width:23px;height:20px;left:29px;top:8px;transform:rotate(42deg);border-radius:11px 3px 11px 3px}.weapon-bow i{width:34px;height:46px;left:10px;top:4px;background:transparent;border:5px solid currentColor;border-left:0;border-radius:0 50% 50% 0}.weapon-bow b{width:2px;height:46px;left:28px;top:4px;transform:rotate(-34deg);transform-origin:top;background:currentColor}
+    </style>
+    <style>
+      .mission-picker{display:inline-flex;align-items:center;gap:7px;margin-top:10px;color:#a7aa9d;font-size:8px;letter-spacing:1.2px}.mission-picker select{color:#e8dfc7;border:1px solid #726d59;background:#1e231f;padding:5px 7px;font:500 9px 'DM Mono',monospace;letter-spacing:.4px;cursor:pointer}.mission-picker select:focus{outline:1px solid #c59b4b;border-color:#c59b4b}.mission-picker option{background:#1e231f}
+    </style>
+    <script>
+      // Prefer the bundled renderer (works from file://). If a deployment missed
+      // the vendor folder, fall back to the same pinned version from the CDN.
+      (function bootGame() {
+        const sources = ['./vendor/three.min.js', 'https://unpkg.com/three@0.160.0/build/three.min.js'];
+        let source = 0;
+        function loadGame() {
+          const game = document.createElement('script');
+          game.src = './game.js';
+          document.body.appendChild(game);
+        }
+        function loadRenderer() {
+          if (window.THREE) return loadGame();
+          const renderer = document.createElement('script');
+          renderer.src = sources[source++];
+          renderer.onload = loadGame;
+          renderer.onerror = source < sources.length ? loadRenderer : function () {
+            document.querySelector('#hint').textContent = 'Unable to load the 3D renderer.';
+          };
+          document.head.appendChild(renderer);
+        }
+        loadRenderer();
+      }());
+    </script>
   </body>
 </html>

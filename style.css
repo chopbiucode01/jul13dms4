@@ -1,1 +1,81 @@
-:root{--ink:#171b1a;--paper:#e8dfc7;--gold:#c59b4b;--red:#b44b42;--blue:#4d8391;--line:#49483e}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#151917 radial-gradient(circle at 50% 0,#2b3229,transparent 48%);color:var(--paper);font-family:'DM Mono',monospace}.shell{max-width:1260px;margin:auto;padding:20px}header{height:78px;display:flex;align-items:center;border-bottom:1px solid #5b5849;justify-content:space-between}.brand{font:800 25px Cinzel,serif;letter-spacing:2px;line-height:1}.brand small{display:block;color:var(--gold);font:500 10px 'DM Mono';letter-spacing:4px;margin-top:8px}.chapter{text-align:center;text-transform:uppercase}.chapter span,.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px}.chapter strong{display:block;margin-top:7px;font:600 15px Cinzel,serif}button{color:var(--paper);border:1px solid #726d59;background:transparent;font:500 11px 'DM Mono';letter-spacing:.5px;padding:11px 13px;cursor:pointer}button:hover{border-color:var(--gold);color:#fff}.game-wrap{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:16px;padding-top:20px}#canvas-wrap{position:relative;min-height:600px;border:1px solid #4a4d40;background:#252b25;overflow:hidden}canvas{display:block;width:100%;height:100%}#hint{position:absolute;left:16px;bottom:14px;background:#171b1ae0;border-left:3px solid var(--gold);padding:9px 12px;font-size:11px;pointer-events:none}aside{display:flex;gap:12px;flex-direction:column}.panel{border:1px solid #4a4d40;background:#1e231f;padding:15px}.panel h2{font:700 19px Cinzel,serif;margin:10px 0 16px}.stat-row{display:grid;grid-template-columns:23px 1fr 32px;align-items:center;font-size:11px}.meter{height:7px;background:#403c33}.meter i{display:block;background:#b95346;height:100%;width:0;transition:width .25s}.stat-grid{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:15px;font-size:10px;color:#a7aa9d}.stat-grid b{color:var(--paper);font-weight:500}.triangle{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:10px;margin-top:12px}.triangle em{font-size:9px;color:#9a998d;font-style:normal}.axe{color:#e1a15d}.sword{color:#d8d8d8}.spear{color:#79b6c2}.bow-note{font-size:10px;color:#a7aa9d;line-height:1.6;margin:12px 0 0}.log-panel{flex:1;min-height:140px}#log{font-size:10px;line-height:1.6;color:#b7b7aa;margin-top:10px;max-height:210px;overflow:auto}.log-entry{border-bottom:1px solid #3c4039;padding:6px 0}.log-entry:first-child{color:#eee2c6}#end-turn{background:#7e342f;border-color:#c85d50;font-weight:bold;margin-top:auto}kbd{font:inherit;color:#e3b1a9;margin-left:7px}footer{display:flex;justify-content:space-between;color:#96998c;font-size:9px;letter-spacing:.5px;padding:15px 2px}.modal{position:fixed;inset:0;background:#101310d9;display:grid;place-items:center;z-index:3}.hidden{display:none}.modal-card{width:min(410px,90vw);text-align:center;border:1px solid #86734a;background:#222820;padding:38px 34px;box-shadow:0 0 80px #000}.modal h1{font:700 31px Cinzel,serif;margin:12px 0}.modal p:not(.eyebrow){font-size:12px;color:#bfc0b3;line-height:1.7;margin-bottom:25px}.modal button{border-color:var(--gold);background:#4c3b21}@media(max-width:800px){.shell{padding:12px}.game-wrap{grid-template-columns:1fr}#canvas-wrap{min-height:430px}aside{display:grid;grid-template-columns:1fr 1fr}.log-panel,#end-turn{grid-column:1/-1}header{height:auto;gap:14px;padding:12px 0}.chapter{display:none}footer{font-size:8px}.brand{font-size:19px}}@media(max-width:450px){aside{grid-template-columns:1fr}.log-panel,#end-turn{grid-column:auto}}
+:root{--ink:#171b1a;--paper:#e8dfc7;--gold:#c59b4b;--red:#b44b42;--blue:#4d8391;--line:#49483e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#151917 radial-gradient(circle at 50% 0,#2b3229,transparent 48%);color:var(--paper);font-family:'DM Mono',monospace}
+.shell{max-width:1260px;margin:auto;padding:20px}
+header{height:78px;display:flex;align-items:center;border-bottom:1px solid #5b5849;justify-content:space-between}
+.brand{font:800 25px Cinzel,serif;letter-spacing:2px;line-height:1}
+.brand small{display:block;color:var(--gold);font:500 10px 'DM Mono';letter-spacing:4px;margin-top:8px}
+.chapter{text-align:center;text-transform:uppercase}
+.chapter span,.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px}
+.chapter strong{display:block;margin-top:7px;font:600 15px Cinzel,serif}
+button{color:var(--paper);border:1px solid #726d59;background:transparent;font:500 11px 'DM Mono';letter-spacing:.5px;padding:11px 13px;cursor:pointer}
+button:hover{border-color:var(--gold);color:#fff}
+.game-wrap{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:16px;padding-top:20px}
+#canvas-wrap{position:relative;min-height:600px;border:1px solid #4a4d40;background:#252b25;overflow:hidden}
+canvas{display:block;width:100%;height:100%}
+#hint{position:absolute;left:16px;bottom:14px;background:#171b1ae0;border-left:3px solid var(--gold);padding:9px 12px;font-size:11px;pointer-events:none}
+.tutorial-card{position:absolute;top:14px;left:14px;width:min(285px,42%);display:block;gap:0;padding:13px 14px;border:1px solid #728b6a;background:#151b18ed;box-shadow:0 8px 26px #0007;pointer-events:none;z-index:1}
+.tutorial-card .eyebrow{font-size:8px;color:#9ed2dd}
+.tutorial-card h3{margin:7px 0 6px;font:700 14px Cinzel,serif;color:#f0e5c8}
+.tutorial-card p{margin:0;color:#c1c6b7;font-size:9px;line-height:1.65}
+.tutorial-card strong{color:#d7b667}
+aside{display:flex;gap:12px;flex-direction:column}
+.panel{border:1px solid #4a4d40;background:#1e231f;padding:15px}
+.panel h2{font:700 19px Cinzel,serif;margin:10px 0 16px}
+.stat-row{display:grid;grid-template-columns:23px 1fr 32px;align-items:center;font-size:11px}
+.meter{height:7px;background:#403c33}
+.meter i{display:block;background:#b95346;height:100%;width:0;transition:width .25s}
+.stat-grid{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:15px;font-size:10px;color:#a7aa9d}
+.stat-grid b{color:var(--paper);font-weight:500}
+.triangle{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:10px;margin-top:12px}
+.triangle em{font-size:9px;color:#9a998d;font-style:normal}
+.axe{color:#e1a15d}
+.sword{color:#d8d8d8}
+.spear{color:#79b6c2}
+.bow-note{font-size:10px;color:#a7aa9d;line-height:1.6;margin:12px 0 0}
+.log-panel{flex:1;min-height:140px}
+#log{font-size:10px;line-height:1.6;color:#b7b7aa;margin-top:10px;max-height:210px;overflow:auto}
+.log-entry{border-bottom:1px solid #3c4039;padding:6px 0}
+.log-entry:first-child{color:#eee2c6}
+#end-turn{background:#7e342f;border-color:#c85d50;font-weight:bold;margin-top:auto}
+#mobile-end-turn{display:none;background:#7e342f;border-color:#c85d50;font-weight:bold}
+#end-turn.tutorial-target,#mobile-end-turn.tutorial-target{position:relative;overflow:visible;border-color:#f0c25b;box-shadow:0 0 0 2px #c59b4b55,0 0 22px #c59b4b88;animation:tutorial-button .8s ease-in-out infinite alternate}
+#end-turn.tutorial-target::before,#mobile-end-turn.tutorial-target::before{content:'↓';position:absolute;left:50%;top:-35px;transform:translateX(-50%);font:700 29px Cinzel,serif;color:#ffdc75;text-shadow:0 0 10px #c59b4b;animation:tutorial-arrow .8s ease-in-out infinite alternate}
+@keyframes tutorial-button{to{transform:translateY(-3px);box-shadow:0 0 0 2px #f0c25b88,0 0 28px #f0c25baa}}
+@keyframes tutorial-arrow{to{transform:translate(-50%,5px)}}
+.action-warning{color:#ffcf62!important;animation:action-warning .16s linear 5}
+@keyframes action-warning{50%{color:#e27166;text-shadow:0 0 8px #e27166}}
+kbd{font:inherit;color:#e3b1a9;margin-left:7px}
+footer{display:flex;justify-content:space-between;color:#96998c;font-size:9px;letter-spacing:.5px;padding:15px 2px}
+.modal{position:fixed;inset:0;background:#101310d9;display:grid;place-items:center;z-index:3}
+.hidden{display:none}
+.modal-card{width:min(410px,90vw);text-align:center;border:1px solid #86734a;background:#222820;padding:38px 34px;box-shadow:0 0 80px #000}
+.modal h1{font:700 31px Cinzel,serif;margin:12px 0}
+.modal p:not(.eyebrow){font-size:12px;color:#bfc0b3;line-height:1.7;margin-bottom:25px}
+.modal button{border-color:var(--gold);background:#4c3b21}
+@media(max-width:800px){.shell{padding:12px}
+.game-wrap{grid-template-columns:1fr}
+#canvas-wrap{min-height:430px}
+aside{display:grid;grid-template-columns:1fr 1fr}
+.log-panel,#end-turn{grid-column:1/-1}
+header{height:auto;gap:14px;padding:12px 0}
+.chapter{display:none}
+footer{font-size:8px}
+.brand{font-size:19px}
+}
+@media(max-width:450px){aside{grid-template-columns:1fr}
+.log-panel,#end-turn{grid-column:auto}
+}
+
+/* Keep the board independent from the growing battle history. */
+.game-wrap{align-items:start}
+#canvas-wrap{height:600px;min-height:0}
+#log{height:155px;max-height:none;overflow-y:scroll;scrollbar-gutter:stable;scrollbar-color:#8b7548 #171b1a}
+#log::-webkit-scrollbar{width:10px}
+#log::-webkit-scrollbar-track{background:#171b1a;border-left:1px solid #3c4039}
+#log::-webkit-scrollbar-thumb{background:#8b7548;border:2px solid #171b1a}
+#log::-webkit-scrollbar-thumb:hover{background:#c59b4b}
+@media(max-width:800px){#canvas-wrap{height:430px}.tutorial-card{width:min(270px,66%);top:10px;left:10px;padding:10px 11px}#end-turn{display:none}#mobile-end-turn{display:block;position:absolute;right:13px;bottom:12px;z-index:2;padding:10px 12px;background:#7e342fe8;box-shadow:0 5px 16px #0008}#mobile-end-turn kbd{display:none}}
+.unit-team{font:500 10px 'DM Mono',monospace;letter-spacing:1px;white-space:nowrap}
+.unit-team.player{color:#76bfd2}
+.unit-team.enemy{color:#e27166}
